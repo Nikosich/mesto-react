@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import "../index.css";
 import Main from "./Main";
@@ -49,6 +49,7 @@ function App() {
         title="Редактировать профиль"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        submitBtn="Сохранить"
       >
         <fieldset className="popup-form__field">
           <input
@@ -76,15 +77,13 @@ function App() {
           />
           <span className="popup-form__input-error about-input-error"></span>
         </fieldset>
-        <button className="popup-form__save-button" type="submit">
-          Сохранить
-        </button>
       </PopupWithForm>
       <PopupWithForm
         name="avatar"
         title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        submitBtn="Сохранить"
       >
         <fieldset className="popup-form__field">
           <input
@@ -97,15 +96,13 @@ function App() {
           />
           <span className="popup-form__input-error link-avatar-error"></span>
         </fieldset>
-        <button className="popup-form__save-button" type="submit">
-          Сохранить
-        </button>
       </PopupWithForm>
       <PopupWithForm
         name="place"
         title="Редактировать профиль"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        submitBtn="Создать"
       >
         <fieldset className="popup-form__field">
           <input
@@ -131,9 +128,6 @@ function App() {
           />
           <span className="popup-form__input-error link-input-error"></span>
         </fieldset>
-        <button className="popup-form__save-button" type="submit">
-          Создать
-        </button>
       </PopupWithForm>
       <ImagePopup 
       card={selectedCard}

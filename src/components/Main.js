@@ -1,5 +1,5 @@
 import { api } from "../utils/Api";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "./Card";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
@@ -7,12 +7,11 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCard] = useState([]);
-  let userId;
+
 
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getProfile()])
       .then(([cards, userData]) => {
-        userId = userData._id;
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
@@ -33,7 +32,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
           ></button>
           <img
             className="profile__image"
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            src={userAvatar}
             alt="Кусто"
           />
           <div className="profile__info">
@@ -58,7 +57,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       </section>
       <ul className="places__container" id="places__container">
         {cards.map((card) => {
-          return <Card card={card} onCardClick={onCardClick} />;
+          return <Card key={card._id} card={card} onCardClick={onCardClick} />;
         })}
       </ul>
     </main>

@@ -51,7 +51,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           id="name-input"
           name="name"
           onChange={handleChangeName}
-          value={name}
+          value={name || ''}
         />
         <span className="popup-form__input-error name-input-error"></span>
       </fieldset>
@@ -66,7 +66,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           id="about-input"
           name="job"
           onChange={handleChangeDescription}
-          value={description}
+          value={description || ''}
         />
         <span className="popup-form__input-error about-input-error"></span>
       </fieldset>

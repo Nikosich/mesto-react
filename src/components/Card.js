@@ -4,10 +4,8 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 function Card({ card, onCardClick, onCardDelete, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
-  const isLiked = card.likes.some(i => i._id === currentUser._id);
-  const likeButtonClassName = ( 
-    `like-button ${isLiked && 'like-button_active'}` 
-  );; 
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const likeButtonClassName = `like-button ${isLiked && "like-button_active"}`;
 
   const handleCardClick = () => {
     onCardClick(card);
@@ -23,12 +21,14 @@ function Card({ card, onCardClick, onCardDelete, onCardLike }) {
 
   return (
     <li className="places__item">
-      { isOwn && <button
-        type="button"
-        className="delete-button"
-        arial-label="удалить"
-        onClick={handleDeleteClick}
-      ></button>}
+      {isOwn && (
+        <button
+          type="button"
+          className="delete-button"
+          arial-label="удалить"
+          onClick={handleDeleteClick}
+        ></button>
+      )}
       <img
         className="places__image"
         src={card.link}

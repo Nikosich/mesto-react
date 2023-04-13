@@ -19,7 +19,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCard] = useState([]);
 
-
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getProfile()])
       .then(([cards, userData]) => {
@@ -33,7 +32,7 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
-  };
+  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -51,7 +50,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    const cardId = card._id
+    const cardId = card._id;
     api
       .deleteCard(cardId)
       .then(() => {
@@ -64,37 +63,40 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
-    api.editProfile(userInfo)
-    .then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(`Error: ${err}`);
-    });
+    api
+      .editProfile(userInfo)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   function handleUpdateAvatar(userInfo) {
-    api.changeAvatar(userInfo)
-    .then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(`Error: ${err}`);
-    });
+    api
+      .changeAvatar(userInfo)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   function handleAddPlaceSubmit(data) {
-    api.addCard(data)
-    .then((newCard) => {
-      setCard((state) => [newCard, ...state]);
-      closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(`Error: ${err}`);
-    });
-}
+    api
+      .addCard(data)
+      .then((newCard) => {
+        setCard((state) => [newCard, ...state]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Error: ${err}`);
+      });
+  }
 
   const openEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -127,9 +129,21 @@ function App() {
           onCardDelete={handleCardDelete}
         />
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/> 
-        <EditAvatarPopupfrom isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+        <EditAvatarPopupfrom
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+        />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
